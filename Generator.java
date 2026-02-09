@@ -15,8 +15,6 @@ public class Generator {
     // CLASS ATTRIBUTE
     private int totalNumbersGenerated = 0;
 
-    // METHOD DEFINITION
-
     // Populate method | Generates n random numbers in [0,1) using a selected generator | Accessibility: public
     public ArrayList<Double> populate(int n, int randNumGen) {
         ArrayList<Double> values = new ArrayList<>();
@@ -67,6 +65,18 @@ public class Generator {
         r.add(max);
 
         return r;
+    }
+
+    // Display method | Displays results in tabular form | Accessibility: public
+    public void display(ArrayList<Double> r, boolean headerOn) {
+        if (headerOn) {
+            System.out.printf("%10s %12s %12s %12s %12s%n",
+                    "n", "Mean", "StdDev", "Min", "Max");
+            System.out.println("------------------------------------------------------------");
+        }
+
+        System.out.printf("%10.0f %12.6f %12.6f %12.6f %12.6f%n",
+                r.get(0), r.get(1), r.get(2), r.get(3), r.get(4));
     }
     
     public void execute() {
