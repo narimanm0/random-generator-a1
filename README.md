@@ -1,1 +1,1 @@
-# random-generator-a1
+# Random Generator A1
