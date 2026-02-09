@@ -17,6 +17,7 @@ public class Generator {
 
     // METHOD DEFINITION
 
+    // Populate method | Generates n random numbers in [0,1) using a selected generator | Accessibility: public
     public ArrayList<Double> populate(int n, int randNumGen) {
         ArrayList<Double> values = new ArrayList<>();
 
@@ -35,6 +36,37 @@ public class Generator {
 
         totalNumbersGenerated += n;
         return values;
+    }
+
+    // Statistics method | Computes n, mean, sample standard deviation, min, and max | Accessibility: public
+    public ArrayList<Double> statistics(ArrayList<Double> values) {
+        int n = values.size();
+        double sum = 0;
+        double min = values.get(0);
+        double max = values.get(0);
+
+        for (double v : values) {
+            sum += v;
+            if (v < min) min = v;
+            if (v > max) max = v;
+        }
+
+        double mean = sum / n;
+        double sqDiff = 0;
+
+        for (double v : values)
+            sqDiff += (v - mean) * (v - mean);
+
+        double stddev = Math.sqrt(sqDiff / (n - 1));
+
+        ArrayList<Double> r = new ArrayList<>();
+        r.add((double) n);
+        r.add(mean);
+        r.add(stddev);
+        r.add(min);
+        r.add(max);
+
+        return r;
     }
     
     public void execute() {
