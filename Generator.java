@@ -43,7 +43,7 @@ public class Generator {
         double min = values.get(0);
         double max = values.get(0);
 
-        for (double v : values) {
+        for (double v: values) {
             sum += v;
             if (v < min) min = v;
             if (v > max) max = v;
@@ -72,15 +72,39 @@ public class Generator {
         if (headerOn) {
             System.out.printf("%10s %12s %12s %12s %12s%n",
                     "n", "Mean", "StdDev", "Min", "Max");
-            System.out.println("------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------");
         }
 
         System.out.printf("%10.0f %12.6f %12.6f %12.6f %12.6f%n",
                 r.get(0), r.get(1), r.get(2), r.get(3), r.get(4));
     }
     
+    // Execute method | Executes the generation and display of statistics for different generators and sizes | Accessibility: public
     public void execute() {
+        int[] sizes = {100, 1000, 10000};
 
+        System.out.printf("%-22s %10s %12s %12s %12s %12s%n",
+                "Generator", "n", "Mean", "StdDev", "Min", "Max");
+        System.out.println("-------------------------------------------------------------------------------------");
+
+        boolean header = true;
+
+        for (int n: sizes) {
+            for (int g = 0; g < 3; g++) {
+                ArrayList<Double> data = populate(n, g);
+                ArrayList<Double> stats = statistics(data);
+
+                if (g == 0) System.out.print("java.util.Random     ");
+                else if (g == 1) System.out.print("Math.random()        ");
+                else System.out.print("ThreadLocalRandom    ");
+
+                display(stats, header);
+                header = false;
+            }
+            System.out.println();
+        }
+
+        System.out.println("Total numbers generated: " + totalNumbersGenerated);
     }
 
     
