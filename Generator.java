@@ -16,6 +16,27 @@ public class Generator {
     private int totalNumbersGenerated = 0;
 
     // METHOD DEFINITION
+
+    public ArrayList<Double> populate(int n, int randNumGen) {
+        ArrayList<Double> values = new ArrayList<>();
+
+        if (randNumGen == 0) {
+            Random r = new Random();
+            for (int i = 0; i < n; i++)
+                values.add(r.nextDouble());
+        } else if (randNumGen == 1) {
+            for (int i = 0; i < n; i++)
+                values.add(Math.random());
+        } else {
+            // Thread-safe random doubles.
+            for (int i = 0; i < n; i++)
+                values.add(ThreadLocalRandom.current().nextDouble());
+        }
+
+        totalNumbersGenerated += n;
+        return values;
+    }
+    
     public void execute() {
 
     }
